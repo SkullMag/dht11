@@ -140,6 +140,10 @@ static int dht11_open(struct inode *inode, struct file *file) {
             dht[i] |= bits[i * 8 + j] << (7 - j);
         }
     }
+
+    for (int i = 0; i < BUFFER_LENGTH; i++)
+      out_buffer[i] = '\0';
+
     if (dht[0] + dht[1] + dht[2] + dht[3] == dht[4]) {
         sprintf(out_buffer, "Temperature: %d.%d. Humidity: %d.%d\n", dht[2], dht[3], dht[0], dht[1]);
     } else {
